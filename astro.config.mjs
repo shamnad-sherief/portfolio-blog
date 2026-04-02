@@ -5,5 +5,5 @@ import tailwind from "@astrojs/tailwind";
 
 export default defineConfig({
   site: "https://shamnadsherief.me",
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), tailwind()],
 });
