@@ -6,10 +6,10 @@ import { dateRange } from "@lib/utils";
 import { WORK } from "@consts";
 
 const collection = (await getCollection("work"))
-  .sort((a: { data: { dateStart: string | number | Date; }; }, b: { data: { dateStart: string | number | Date; }; }) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf());
+  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf());
 
 const work = await Promise.all(
-  collection.map(async (item: { render: () => PromiseLike<{ Content: any; }> | { Content: any; }; }) => {
+  collection.map(async (item) => {
     const { Content } = await item.render();
     return { ...item, Content };
   })
