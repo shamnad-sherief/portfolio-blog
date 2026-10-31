@@ -19,6 +19,87 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/nano.png" } = Astro.props;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://shamnadsherief.me/#person",
+      "name": "Shamnad Sherief",
+      "givenName": "Shamnad",
+      "familyName": "Sherief",
+      "additionalName": "Muhammed Shamnad S",
+      "alternateName": [
+        "Muhammed Shamnad",
+        "Muhammed Shamnad S",
+        "Shamnad",
+        "shamnadsherief",
+        "Shamnad Systems Programmer",
+        "Shamnad Software Engineer"
+      ],
+      "jobTitle": "Systems Engineer",
+      "description": "Systems Engineer specializing in Rust, Linux, container runtime systems, and infrastructure development.",
+      "url": "https://shamnadsherief.me/",
+      "image": new URL(image, Astro.site).href,
+      "email": "shamnad@shamnadsherief.me",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Alappuzha",
+        "addressRegion": "Kerala",
+        "addressCountry": "India"
+      },
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Marian College Kuttikkanam"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Kerala University"
+        }
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Tinkerblox Pvt Ltd"
+      },
+      "sameAs": [
+        "https://github.com/shamnadsherief",
+        "https://www.linkedin.com/in/shamnadsherief",
+        "https://stackoverflow.com/users/15167371/shamnad-sherief"
+      ],
+      "knowsAbout": [
+        "Rust",
+        "Linux",
+        "Systems Programming",
+        "Container Runtimes",
+        "OCI Specifications",
+        "DevOps",
+        "Cloud Infrastructure",
+        "Docker",
+        "Kubernetes",
+        "Backend Architecture"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://shamnadsherief.me/#website",
+      "url": "https://shamnadsherief.me/",
+      "name": "Shamnad Sherief",
+      "alternateName": [
+        "Muhammed Shamnad",
+        "Muhammed Shamnad S",
+        "Shamnad Systems Programmer",
+        "Shamnad Software Engineer"
+      ],
+      "description": "Systems Engineer specializing in Rust, Linux, and infrastructure development.",
+      "publisher": {
+        "@id": "https://shamnadsherief.me/#person"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+};
 ---
 
 <!-- Global Metadata -->
@@ -29,6 +110,17 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <link rel="icon" type="image/x-icon" href="/favicon-light.svg">
 <meta name="generator" content={Astro.generator} />
 
+<!-- Search Engine Optimization (SEO) -->
+<meta name="author" content="Shamnad Sherief, Muhammed Shamnad S" />
+<meta name="keywords" content="Shamnad, Muhammed Shamnad, Shamnad Sherief, Muhammed Shamnad S, Shamnad Systems Programmer, Shamnad Software Engineer, Systems Engineer, Systems Programmer, Rust, Linux, Container Runtime, Infrastructure, Freelance, Kerala, India" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+<!-- Canonical URL & Discoverability -->
+<link rel="canonical" href={canonicalURL} />
+<link rel="alternate" type="application/rss+xml" title="Shamnad Sherief" href={new URL("rss.xml", Astro.site)} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
 <!-- Font preloads -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,27 +130,34 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href={lora600} as="font" type="font/woff2" crossorigin/>
 
-<!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
-
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content="Shamnad Sherief" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="profile:first_name" content="Shamnad" />
+<meta property="profile:last_name" content="Sherief" />
+<meta property="profile:username" content="shamnadsherief" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:site" content="@shamnadsherief" />
+<meta property="twitter:creator" content="@shamnadsherief" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Schema.org Structured Data (JSON-LD) for Search Engines -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
 <ClientRouter />
 
@@ -85,16 +184,18 @@ const { title, description, image = "/nano.png" } = Astro.props;
     const backToPrev = document.getElementById("back-to-prev");
     backToPrev?.addEventListener("click", () => window.history.back());
 
-    const lightThemeButton = document.getElementById("light-theme-button");
-    lightThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "light");
-      toggleTheme(false);
+    document.querySelectorAll(".light-theme-btn, #light-theme-button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        localStorage.setItem("theme", "light");
+        toggleTheme(false);
+      });
     });
 
-    const darkThemeButton = document.getElementById("dark-theme-button");
-    darkThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "dark");
-      toggleTheme(true);
+    document.querySelectorAll(".dark-theme-btn, #dark-theme-button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        localStorage.setItem("theme", "dark");
+        toggleTheme(true);
+      });
     });
 
     const systemThemeButton = document.getElementById("system-theme-button");

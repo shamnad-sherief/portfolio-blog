@@ -9,23 +9,23 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Systems Engineer specializing in Rust, Linux, and infrastructure development.",
+  TITLE: "Shamnad Sherief | Systems Engineer & Software Developer (Muhammed Shamnad)",
+  DESCRIPTION: "Shamnad Sherief (Muhammed Shamnad) is a Systems Engineer & Software Developer specializing in Rust, Linux, container runtime systems, and backend infrastructure.",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on systems programming, Rust, and Linux.",
+  DESCRIPTION: "Articles and insights on systems programming, Rust, Linux internals, and infrastructure engineering by Shamnad Sherief.",
 };
 
 export const WORK: Metadata = {
   TITLE: "Work",
-  DESCRIPTION: "My professional software and systems engineering experience.",
+  DESCRIPTION: "Professional software and systems engineering experience of Shamnad Sherief (Muhammed Shamnad).",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my open-source and systems engineering projects.",
+  DESCRIPTION: "Open-source projects, database engines, and systems tools built by Shamnad Sherief.",
 };
 
 export const SOCIALS: Socials = [

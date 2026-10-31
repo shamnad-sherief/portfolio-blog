@@ -24,7 +24,7 @@ body {
 }
 
 header {
-  @apply sticky top-0 left-0 right-0 z-50 py-6;
+  @apply sticky top-0 left-0 right-0 z-50 py-4 sm:py-6;
   @apply bg-white/95 dark:bg-[#121212]/95;
   @apply backdrop-blur-sm;
 }
