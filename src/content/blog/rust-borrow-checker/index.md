@@ -59,4 +59,4 @@ The borrow checker was never an obstacle. It was just a teacher.
 
 ---
 
-*Shamnad Sherief - Product Engineer*
+*Shamnad Sherief - Systems Engineer*

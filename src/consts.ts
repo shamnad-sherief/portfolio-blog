@@ -2,30 +2,30 @@ import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
   NAME: "Shamnad Sherief",
-  EMAIL: "shamnadsherief@pm.me",
+  EMAIL: "shamnad@shamnadsherief.me",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Flutter Engineer (Product & Fintech) passionate about building high-quality, user-centric products.",
+  TITLE: "Shamnad Sherief | Systems Engineer & Software Developer (Muhammed Shamnad)",
+  DESCRIPTION: "Shamnad Sherief (Muhammed Shamnad) is a Systems Engineer & Software Developer specializing in Rust, Linux, container runtime systems, and backend infrastructure.",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  DESCRIPTION: "Articles and insights on systems programming, Rust, Linux internals, and infrastructure engineering by Shamnad Sherief.",
 };
 
 export const WORK: Metadata = {
   TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+  DESCRIPTION: "Professional software and systems engineering experience of Shamnad Sherief (Muhammed Shamnad).",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION: "Open-source projects, database engines, and systems tools built by Shamnad Sherief.",
 };
 
 export const SOCIALS: Socials = [

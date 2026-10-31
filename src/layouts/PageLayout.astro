@@ -10,12 +10,13 @@ type Props = {
 };
 
 const { title, description } = Astro.props;
+const pageTitle = title.includes(SITE.NAME) ? title : `${title} | ${SITE.NAME}`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Head title={`${title} | ${SITE.NAME}`} description={description} />
+    <Head title={pageTitle} description={description} />
   </head>
   <body>
     <Header />
