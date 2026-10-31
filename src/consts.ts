@@ -2,7 +2,7 @@ import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
   NAME: "Shamnad Sherief",
-  EMAIL: "shamnadsherief@pm.me",
+  EMAIL: "shamnad@shamnadsherief.me",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
@@ -10,22 +10,22 @@ export const SITE: Site = {
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Flutter Engineer (Product & Fintech) passionate about building high-quality, user-centric products.",
+  DESCRIPTION: "Systems Engineer specializing in Rust, Linux, and infrastructure development.",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  DESCRIPTION: "A collection of articles on systems programming, Rust, and Linux.",
 };
 
 export const WORK: Metadata = {
   TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+  DESCRIPTION: "My professional software and systems engineering experience.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION: "A collection of my open-source and systems engineering projects.",
 };
 
 export const SOCIALS: Socials = [

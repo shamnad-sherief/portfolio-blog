@@ -30,6 +30,9 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href={inter600} as="font" type="font/woff2" crossorigin/>
 <link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin/>
@@ -168,10 +171,13 @@ function toggleTheme(dark) {
   function preloadTheme() {
     const userTheme = localStorage.theme;
 
-    if (userTheme === "light" || userTheme === "dark") {
-      toggleTheme(userTheme === "dark");
-    } else {
+    if (userTheme === "dark") {
+      toggleTheme(true);
+    } else if (userTheme === "system") {
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    } else {
+      // Default to bright / light theme
+      toggleTheme(false);
     }
   }
 

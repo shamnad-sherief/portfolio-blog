@@ -34,4 +34,4 @@ Stop trying to force your UI into percentages. **Constraints are king.**
 
 ---
 
-*Shamnad Sherief - Product Engineer*
+*Shamnad Sherief - Systems Engineer*
