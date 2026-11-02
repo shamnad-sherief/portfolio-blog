@@ -18,32 +18,87 @@ const work = await Promise.all(
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <Container>
-    <div class="space-y-8 font-mono">
+    <div class="space-y-12 font-mono">
       <h1 class="animate text-3xl sm:text-4xl font-bold tracking-tight text-black dark:text-white">
         Work.
       </h1>
-      <ul class="flex flex-col space-y-8">
-        { 
-          work.map(entry => (
-            <li class="animate space-y-1">
-              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
-                <h2 class="font-bold text-black dark:text-white text-base">
-                  ## {entry.data.company}
-                </h2>
-                <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">
-                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-                </span>
-              </div>
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">
-                {entry.data.role}
-              </div>
-              <article class="pt-2 text-sm text-neutral-700 dark:text-neutral-300">
-                <entry.Content />
-              </article>
-            </li>
-          ))
-        }
-      </ul>
+
+      <!-- Work Experience -->
+      <section class="animate space-y-6">
+        <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
+          # Experience
+        </h2>
+        <ul class="flex flex-col space-y-8">
+          { 
+            work.map(entry => (
+              <li class="space-y-1">
+                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
+                  <h3 class="font-bold text-black dark:text-white text-base">
+                    ## {entry.data.company}
+                  </h3>
+                  <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">
+                    {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                  </span>
+                </div>
+                <div class="text-xs text-neutral-500 dark:text-neutral-400">
+                  {entry.data.role}
+                </div>
+                <article class="pt-2 text-sm text-neutral-700 dark:text-neutral-300">
+                  <entry.Content />
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <!-- Technical Skills -->
+      <section class="animate space-y-4">
+        <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
+          # Skills & toolkit
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="space-y-1">
+            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## Languages</span>
+            <p class="text-neutral-800 dark:text-neutral-200">Rust, Go, Python, Bash, SQL</p>
+          </div>
+          <div class="space-y-1">
+            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## Systems Engineering</span>
+            <p class="text-neutral-800 dark:text-neutral-200">Linux internals, system programming, process management, daemons, concurrency</p>
+          </div>
+          <div class="space-y-1">
+            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## Networking</span>
+            <p class="text-neutral-800 dark:text-neutral-200">TCP, UDP, gRPC, network programming</p>
+          </div>
+          <div class="space-y-1">
+            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## DevOps & Cloud</span>
+            <p class="text-neutral-800 dark:text-neutral-200">Docker, Kubernetes, GitLab CI/CD, Jenkins, Terraform, AWS</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="animate space-y-4">
+        <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
+          # Education
+        </h2>
+        <ul class="space-y-4 text-xs sm:text-sm">
+          <li class="space-y-0.5">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
+              <span class="font-bold text-black dark:text-white">## Master of Computer Applications (MCA)</span>
+              <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">2021 — 2023</span>
+            </div>
+            <p class="text-neutral-500 dark:text-neutral-400">Marian College Kuttikkanam (Autonomous) &bull; Grade: 85%</p>
+          </li>
+          <li class="space-y-0.5">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
+              <span class="font-bold text-black dark:text-white">## Bachelor of Science in Computer Science (BSc)</span>
+              <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">2018 — 2021</span>
+            </div>
+            <p class="text-neutral-500 dark:text-neutral-400">Kerala University &bull; Grade: 64%</p>
+          </li>
+        </ul>
+      </section>
     </div>
   </Container>
 </PageLayout>

@@ -4,29 +4,12 @@ import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 
 const blog = (await getCollection("blog"))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0, SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
-);
+  .slice(0, 3);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -35,59 +18,89 @@ const work = await Promise.all(
       Homepage.
     </h1>
 
-    <div class="space-y-12">
-      <!-- About / Welcome -->
-      <section class="animate space-y-4 font-mono">
+    <div class="space-y-10 font-mono text-neutral-800 dark:text-neutral-200">
+      <!-- Welcome -->
+      <section class="animate space-y-4">
         <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
           # Welcome!
         </h2>
-        <div class="space-y-3 leading-relaxed text-neutral-800 dark:text-neutral-200">
+        <div class="space-y-3 leading-relaxed text-[15px]">
           <p>
-            Welcome to my site. I'm <b>Shamnad Sherief</b> (also known as <b>Muhammed Shamnad</b>), a <b>Systems Engineer</b> & <b>Software Engineer</b> based in Kerala, India. I specialize in <b>Rust</b>, <b>Linux</b>, and infrastructure development, with 3+ years of software engineering experience across backend systems, DevOps, and production infrastructure.
+            Welcome to my corner of the internet. I'm <b>Shamnad</b>, a systems programmer based in Kerala, India.
           </p>
           <p>
-            Currently working on research and development of Rust-based container runtime systems for AI workloads, with experience in OCI specifications, asynchronous programming, Linux system interfaces, background daemons, and network communication.
+            I spend most of my time writing <b>Rust</b>, exploring Linux system interfaces, and building container runtime systems for AI workloads.
           </p>
           <p>
-            Passionate about systems programming, open-source development, and modernizing existing infrastructure and software written in C and Go using Rust.
+            When I'm not tracing syscalls or hacking on low-level infrastructure, I contribute to open source and write about software design and systems programming.
           </p>
         </div>
       </section>
 
-      <!-- Skills -->
-      <section class="animate space-y-4 font-mono">
+      <!-- Things I value -->
+      <section class="animate space-y-5">
         <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
-          # Technical skills
+          # Things I value
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-          <div class="space-y-1">
-            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## Languages</span>
-            <p class="text-neutral-800 dark:text-neutral-200">Rust, Go, Python, Bash, SQL</p>
+
+        <div class="space-y-4">
+          <div class="space-y-1.5">
+            <h3 class="font-bold text-black dark:text-white text-sm sm:text-base">
+              ## Control & Memory Safety
+            </h3>
+            <p class="leading-relaxed text-[15px] text-neutral-700 dark:text-neutral-300">
+              I'm biased towards the Rust idiom. I care about predictable performance, ownership, and zero-cost abstractions. Having full control over memory and system execution without a garbage collector is something I value deeply.
+            </p>
           </div>
-          <div class="space-y-1">
-            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## Systems Engineering</span>
-            <p class="text-neutral-800 dark:text-neutral-200">Linux internals, system programming, process management, daemons, concurrency</p>
+
+          <div class="space-y-1.5">
+            <h3 class="font-bold text-black dark:text-white text-sm sm:text-base">
+              ## Linux & Minimalist Systems
+            </h3>
+            <p class="leading-relaxed text-[15px] text-neutral-700 dark:text-neutral-300">
+              I love operating systems, kernel namespaces, cgroups, and network protocols. Good software should be lean, composable, and respect system resources instead of piling on unnecessary layers of abstraction.
+            </p>
           </div>
-          <div class="space-y-1">
-            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## Networking</span>
-            <p class="text-neutral-800 dark:text-neutral-200">TCP, UDP, gRPC, network programming</p>
-          </div>
-          <div class="space-y-1">
-            <span class="text-neutral-400 dark:text-neutral-500 font-semibold">## DevOps & Cloud</span>
-            <p class="text-neutral-800 dark:text-neutral-200">Docker, Kubernetes, GitLab CI/CD, Jenkins, Terraform, AWS</p>
-          </div>
+
         </div>
       </section>
 
-      <!-- Latest posts -->
+      <!-- Current focus -->
+      <section class="animate space-y-4">
+        <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
+          # What I'm up to
+        </h2>
+        <ul class="space-y-2 text-[15px] leading-relaxed">
+          <li class="flex items-start gap-2.5">
+            <span class="text-neutral-400 dark:text-neutral-500 select-none">&bull;</span>
+            <span>
+              Researching and Developing OCI-compliant container runtime architectures for AI infrastructure at <b>Tinkerblox</b>.
+            </span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-neutral-400 dark:text-neutral-500 select-none">&bull;</span>
+            <span>
+              Building <Link href="/projects" underline={false} class="hover:underline font-semibold text-black dark:text-white">MurexDB</Link> — an experimental, modular database engine written in Rust.
+            </span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="text-neutral-400 dark:text-neutral-500 select-none">&bull;</span>
+            <span>
+              Exploring distributed systems, Tokio-based async networking, and modernizing C/C++ tooling into Rust.
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Recent writings -->
       {blog.length > 0 && (
         <section class="animate space-y-4">
-          <div class="flex items-baseline justify-between font-mono">
+          <div class="flex items-baseline justify-between">
             <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
-              # Latest posts
+              # Recent writings
             </h2>
             <Link href="/blog" underline={false} class="text-xs text-neutral-500 hover:text-black dark:hover:text-white hover:underline">
-              /view-all &rarr;
+              /all-posts &rarr;
             </Link>
           </div>
           <ul class="flex flex-col gap-3">
@@ -100,89 +113,15 @@ const work = await Promise.all(
         </section>
       )}
 
-      <!-- Work experience -->
-      <section class="animate space-y-4">
-        <div class="flex items-baseline justify-between font-mono">
-          <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
-            # Work experience
-          </h2>
-          <Link href="/work" underline={false} class="text-xs text-neutral-500 hover:text-black dark:hover:text-white hover:underline">
-            /view-all &rarr;
-          </Link>
-        </div>
-        <ul class="flex flex-col space-y-6">
-          {work.map(entry => (
-            <li class="space-y-1 font-mono">
-              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
-                <h3 class="font-bold text-black dark:text-white text-sm sm:text-base">
-                  ## {entry.data.company}
-                </h3>
-                <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">
-                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-                </span>
-              </div>
-              <div class="text-xs text-neutral-500 dark:text-neutral-400">
-                {entry.data.role}
-              </div>
-              <article class="pt-1 text-sm text-neutral-700 dark:text-neutral-300">
-                <entry.Content />
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <!-- Open Source & Projects -->
-      <section class="animate space-y-4">
-        <div class="flex items-baseline justify-between font-mono">
-          <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
-            # Projects & open source
-          </h2>
-          <Link href="/projects" underline={false} class="text-xs text-neutral-500 hover:text-black dark:hover:text-white hover:underline">
-            /view-all &rarr;
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-3">
-          {projects.map(project => (
-            <li>
-              <ArrowCard entry={project} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <!-- Education -->
-      <section class="animate space-y-4 font-mono">
+      <!-- Say Hello / Connect -->
+      <section class="animate space-y-3">
         <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
-          # Education
+          # Say hello
         </h2>
-        <ul class="space-y-4 text-xs sm:text-sm">
-          <li class="space-y-0.5">
-            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
-              <span class="font-bold text-black dark:text-white">## Master of Computer Applications (MCA)</span>
-              <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">2021 — 2023</span>
-            </div>
-            <p class="text-neutral-500 dark:text-neutral-400">Marian College Kuttikkanam (Autonomous) &bull; Grade: 85%</p>
-          </li>
-          <li class="space-y-0.5">
-            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-2">
-              <span class="font-bold text-black dark:text-white">## Bachelor of Science in Computer Science (BSc)</span>
-              <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">2018 — 2021</span>
-            </div>
-            <p class="text-neutral-500 dark:text-neutral-400">Kerala University &bull; Grade: 64%</p>
-          </li>
-        </ul>
-      </section>
-
-      <!-- Connect -->
-      <section class="animate space-y-4 font-mono">
-        <h2 class="font-bold text-black dark:text-white text-base sm:text-lg">
-          # Connect
-        </h2>
-        <p class="text-neutral-800 dark:text-neutral-200 text-sm">
-          Feel free to reach out for collaborations, discussions on systems and infrastructure, or just to say hi:
+        <p class="text-[15px] leading-relaxed text-neutral-700 dark:text-neutral-300">
+          If you want to talk about Rust, systems architecture, or just share cool tech, feel free to reach out:
         </p>
-        <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm pt-1">
           {SOCIALS.map(SOCIAL => (
             <li>
               <Link href={SOCIAL.HREF} external underline={false} class="hover:underline">
