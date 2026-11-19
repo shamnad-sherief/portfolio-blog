@@ -1,5 +1,5 @@
 ---
-company: "Tinkerblox Pvt Ltd"
+company: "Tinkerblox"
 role: "Systems Engineer - Rust & AI Infrastructure"
 dateStart: "10/01/2025"
 dateEnd: "Present"
