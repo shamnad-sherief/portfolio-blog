@@ -6,4 +6,13 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   site: "https://shamnadsherief.me/",
   integrations: [mdx(), tailwind(), sitemap()],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
+      wrap: true,
+    },
+  },
 });

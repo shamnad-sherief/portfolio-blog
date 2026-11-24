@@ -1,0 +1,51 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrev from "@components/BackToPrev.astro";
+
+export async function getStaticPaths() {
+  const tutorials = (await getCollection("tutorials"))
+    .filter(tutorial => !tutorial.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return tutorials.map((tutorial) => ({
+    params: { slug: tutorial.slug },
+    props: tutorial,
+  }));
+}
+type Props = CollectionEntry<"tutorials">;
+
+const tutorial = Astro.props;
+const { Content } = await tutorial.render();
+---
+
+<PageLayout title={tutorial.data.title} description={tutorial.data.description}>
+  <Container>
+    <div class="animate font-mono mb-8">
+      <BackToPrev href="/blog">
+        back to blog
+      </BackToPrev>
+    </div>
+    <div class="space-y-2 mb-8 font-mono">
+      {tutorial.data.series && (
+        <div class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+          Series: {tutorial.data.series} {tutorial.data.part && `(Part ${tutorial.data.part})`}
+        </div>
+      )}
+      <div class="animate flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
+        <FormattedDate date={tutorial.data.date} />
+        <span>&bull;</span>
+        <span>{readingTime(tutorial.body)}</span>
+      </div>
+      <h1 class="animate text-2xl sm:text-3xl font-bold text-black dark:text-white tracking-tight">
+        {tutorial.data.title}
+      </h1>
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
+</PageLayout>
+

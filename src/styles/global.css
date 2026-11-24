@@ -43,7 +43,69 @@ article {
   @apply prose-p:font-mono prose-p:text-neutral-800 prose-p:dark:text-neutral-200 prose-p:leading-relaxed;
   @apply prose-headings:text-black prose-headings:dark:text-white;
   @apply prose-strong:text-black prose-strong:dark:text-white;
-  @apply prose-code:text-black prose-code:dark:text-white;
+}
+
+/* Code block container */
+article pre {
+  @apply relative rounded-lg my-6 p-4 overflow-x-auto text-[13.5px] leading-relaxed !important;
+}
+
+article pre code {
+  @apply font-mono bg-transparent p-0 border-0 text-inherit;
+}
+
+/* Inline code only */
+article :not(pre)>code {
+  @apply px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-[13px] border border-neutral-200/80 dark:border-neutral-700/80 font-mono;
+}
+
+article :not(pre)>code::before,
+article :not(pre)>code::after {
+  content: "" !important;
+}
+
+/* Shiki Dual Theme Switcher */
+html:not(.dark) .astro-code {
+  color: var(--shiki-light) !important;
+  background-color: #f6f8fa !important;
+  /* Soft distinct gray in light theme */
+  border: 1px solid #e1e4e8 !important;
+}
+
+html:not(.dark) .astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-light-font-style) !important;
+  font-weight: var(--shiki-light-font-weight) !important;
+  text-decoration: var(--shiki-light-text-decoration) !important;
+}
+
+html.dark .astro-code {
+  color: var(--shiki-dark) !important;
+  background-color: #16181d !important;
+  /* High-contrast background in dark theme */
+  border: 1px solid #27272a !important;
+}
+
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Copy button on code blocks */
+.copy-code-btn {
+  @apply absolute top-2.5 right-2.5 px-2 py-0.5 text-xs font-mono rounded opacity-80 hover:opacity-100;
+  @apply bg-white hover:bg-neutral-100 dark:bg-neutral-800 dark:hover:bg-neutral-700;
+  @apply text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white;
+  @apply border border-neutral-300 dark:border-neutral-700;
+  @apply shadow-sm transition-all duration-150 select-none cursor-pointer;
+}
+
+.copy-code-btn.copied {
+  @apply text-emerald-600 dark:text-emerald-400 border-emerald-500/50 opacity-100;
 }
 
 @layer utilities {

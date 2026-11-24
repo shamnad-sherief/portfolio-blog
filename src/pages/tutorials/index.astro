@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+
+const tutorials = (await getCollection("tutorials"))
+  .filter(t => !t.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title="Tutorials" description="Systems engineering and Rust tutorials.">
+  <Container>
+    <div class="space-y-8 font-mono">
+      <h1 class="animate text-3xl sm:text-4xl font-bold tracking-tight text-black dark:text-white">
+        Tutorials.
+      </h1>
+      
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        In-depth, hands-on guides for systems programming, Linux internals, and Rust.
+      </p>
+
+      <ul class="animate flex flex-col gap-4">
+        {
+          tutorials.map((tutorial) => (
+            <li class="group">
+              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-x-4">
+                <a 
+                  href={`/tutorials/${tutorial.slug}`} 
+                  class="text-neutral-900 dark:text-neutral-100 font-medium group-hover:underline underline-offset-4 decoration-1 hover:text-black dark:hover:text-white"
+                >
+                  {tutorial.data.title}
+                </a>
+                <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">
+                  <FormattedDate date={tutorial.data.date} />
+                </span>
+              </div>
+              {tutorial.data.description && (
+                <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1 line-clamp-2">
+                  {tutorial.data.description}
+                </p>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</PageLayout>
+
